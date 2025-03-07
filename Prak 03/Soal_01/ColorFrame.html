@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame Color Changer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    
+    <div class="w-full border-b-4 border-gray-400 pb-4 flex justify-center">
+        <div class="flex space-x-4">
+            <form method="get" action="red.html" target="frame1">
+                <input type="submit" value="Red" class="border border-gray-400 px-4 py-2">
+            </form>
+            <form method="get" action="green.html" target="frame2">
+                <input type="submit" value="Green" class="border border-gray-400 px-4 py-2">
+            </form>
+        </div>
+    </div>
+
+    <div class="w-full border-b-4 border-gray-400 py-4 flex items-center justify-center">
+        <div class="flex flex-col space-y-4 mr-4">
+            <form method="get" action="gray.html" target="frame1">
+                <input type="submit" value="Gray" class="border border-gray-400 px-4 py-2">
+            </form>
+            <form method="get" action="black.html" target="frame3">
+                <input type="submit" value="Black" class="border border-gray-400 px-4 py-2">
+            </form>
+        </div>
+        
+        <div class="grid grid-cols-2 grid-rows-2 gap-1 border border-gray-400">
+            <iframe name="frame1" class="h-32 w-48 border border-gray-400"></iframe>
+            <iframe name="frame2" class="h-32 w-48 border border-gray-400"></iframe>
+            <iframe name="frame3" class="h-32 w-48 border border-gray-400"></iframe>
+            <iframe name="frame4" class="h-32 w-48 border border-gray-400"></iframe>
+        </div>
+
+        <div class="flex flex-col space-y-4 ml-4">
+            <form method="get" action="blue.html" target="frame2">
+                <input type="submit" value="Blue" class="border border-gray-400 px-4 py-2">
+            </form>
+            <form method="get" action="cyan.html" target="frame4">
+                <input type="submit" value="Cyan" class="border border-gray-400 px-4 py-2">
+            </form>
+        </div>
+    </div>
+
+    <div class="w-full flex justify-center pt-4">
+        <div class="flex space-x-4">
+            <form method="get" action="magenta.html" target="frame3">
+                <input type="submit" value="Magenta" class="border border-gray-400 px-4 py-2">
+            </form>
+            <form method="get" action="yellow.html" target="frame4">
+                <input type="submit" value="Yellow" class="border border-gray-400 px-4 py-2">
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
