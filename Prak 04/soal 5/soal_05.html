@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>soal_5</title>
+    <style>
+        ul {
+            list-style-type: none; 
+        }
+        
+        .list-purple {
+            list-style-image: url('sqpurple.gif'); 
+        }
+
+        .list-orange {
+            list-style-image: url('sqorange.gif'); 
+        }
+
+        .text-bold {
+            font-weight: bold;
+            color: orange;
+        }
+
+        .text-green {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <ul class="list-purple">
+        <li>Coffee</li>
+        <li>Tea
+            <ul class="list-orange">
+                <li><span class="text-bold">Cold</span> Tea
+                    <ul>
+                        <li><u>Jasmine</u></li>
+                        <li><u>Green</u></li>
+                    </ul>
+                </li>
+                <li><span class="text-bold">Hot</span> Tea</li>
+            </ul>
+        </li>
+        <li>Coca Cola</li>
+    </ul>
+</body>
+</html>
