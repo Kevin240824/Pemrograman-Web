@@ -1,0 +1,52 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .image-wrapper {
+    position: relative;
+  }
+  
+  .image-wrapper img {
+    width: 200px;
+    height: auto;
+    transition: border-color 1.3s ease;
+  }
+  
+  .image-wrapper::before,
+  .image-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-style: solid;
+    transition: border-color 0.3s ease;
+  }
+  
+  .image-wrapper::before {
+    top: 0;
+    left: 0;
+    border-width: 4px 0 0 4px;
+    border-color: red;
+  }
+  
+  .image-wrapper::after {
+    bottom: 0;
+    right: 0;
+    border-width: 0 4px 4px 0;
+    border-color: red;
+  }
+  
+  .image-wrapper:hover img {
+    border-color: transparent;
+  }
+  
+  .image-wrapper:hover::before {
+    border-color: magenta;
+  }
+  
+  .image-wrapper:hover::after {
+    border-color: magenta;
+  }
