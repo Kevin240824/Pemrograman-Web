@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tampilan Web</title>
+    <style>
+        table {
+            width: 100%;
+            text-align: center;
+        }
+        .image-container {
+            display: inline-block;
+            position: relative;
+            padding: 20px;
+        }
+        .image-container img {
+            width: 150px;
+        }
+        .border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        .border::before,
+        .border::after {
+            content: '';
+            position: absolute;
+            background-color: #FF0000;
+        }
+        /* Sudut kiri atas */
+        .border::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 30px;
+        }
+        .border::after {
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 10px;
+        }
+        /* Sudut kanan atas */
+        .border::before.top-right {
+            top: 0;
+            right: 0;
+            left: auto;
+            width: 10px;
+            height: 30px;
+        }
+        .border::after.top-right {
+            top: 0;
+            right: 0;
+            left: auto;
+            width: 30px;
+            height: 10px;
+        }
+        /* Sudut kiri bawah */
+        .border::before.bottom-left {
+            bottom: 0;
+            left: 0;
+            top: auto;
+            width: 10px;
+            height: 30px;
+        }
+        .border::after.bottom-left {
+            bottom: 0;
+            left: 0;
+            top: auto;
+            width: 30px;
+            height: 10px;
+        }
+        /* Sudut kanan bawah */
+        .border::before.bottom-right {
+            bottom: 0;
+            right: 0;
+            top: auto;
+            left: auto;
+            width: 10px;
+            height: 30px;
+        }
+        .border::after.bottom-right {
+            bottom: 0;
+            right: 0;
+            top: auto;
+            left: auto;
+            width: 30px;
+            height: 10px;
+        }
+        .image-container:hover .border::before,
+        .image-container:hover .border::after {
+            background-color: #FF00FF;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <div class="image-container">
+                    <div class="border">
+                        <div class="border::before top-right"></div>
+                        <div class="border::after top-right"></div>
+                        <div class="border::before bottom-left"></div>
+                        <div class="border::after bottom-left"></div>
+                        <div class="border::before bottom-right"></div>
+                        <div class="border::after bottom-right"></div>
+                    </div>
+                    <img src="star.jpg" alt="Bintang">
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
