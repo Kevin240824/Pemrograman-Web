@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid</title>
+    <style>
+        table {
+            width: 800px;
+            height: 600px;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        td {
+            width: 40px;
+            height: 40px;
+            background-color: orange;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <label for="height">Tinggi Piramida:</label>
+    <input id="height" min="1" max="15">
+    <button onclick="generatePyramid()">Proses</button>
+    <br>
+    <table id="pyramid"></table>
+
+    <script>
+        function generatePyramid() {
+            const height = parseInt(document.getElementById('height').value);
+            const table = document.getElementById('pyramid');
+            table.innerHTML = '';
+            
+            for (let i = 0; i < height; i++) {
+                let row = document.createElement('tr');
+                let totalCells = height * 2 - 1;
+                
+                for (let j = 0; j < totalCells; j++) {
+                    let cell = document.createElement('td');
+                    if (j >= height - 1 - i && j <= height - 1 + i) {
+                        cell.style.backgroundColor = 'orange';
+                    } else {
+                        cell.style.backgroundColor = 'white';
+                    }
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Convertion</title>
+    <style>
+        body { font-family: 'Times New Roman', Times, serif; text-align: center; margin: 40px; }
+        input, select { margin: 12px; padding: 6px;}
+         button { margin: 12px; padding: 6px; color: blue;}
+    </style>
+</head>
+<body>
+    <label for="inputValue">Input :</label>
+    <input type="text" id="inputValue" maxlength="8">
+    <br>
+    <label for="outputValue">Output :</label>
+    <input type="text" id="outputValue" readonly>
+    <br>
+    <select id="conversionType">
+        <option value="Desimal ke Biner">decimal-biner</option>
+        <option value="Biner ke Desimal">biner-decimal</option>
+    </select>
+    <br>
+    <button onclick="convert()">PROSES</button>
+    <button onclick="resetForm()">RESET</button>
+
+    <script>
+        function convert() {
+            let input = document.getElementById("inputValue").value;
+            let conversionType = document.getElementById("conversionType").value;
+            let output = "";
+
+            if (conversionType === "Desimal ke Biner") {
+                let desimal = parseInt(input);
+                if (isNaN(desimal) || desimal < 0 || desimal > 255) {
+                    alert("Masukkan angka 0-255!");
+                    return;
+                }
+                output = decimalToBinary(desimal);
+            } else {
+                if (input.length !== 8) {
+                    alert("Masukkan 8 digit biner (0 atau 1)!");
+                    return;
+                  }
+                  
+                  for (let i = 0; i < input.length; i++) {
+                    if (input[i] !== '0' && input[i] !== '1') {
+                      alert("Masukkan 8 digit biner (0 atau 1)!");
+                      return;
+                }
+            }
+                output = binaryToDecimal(input);
+            }
+            document.getElementById("outputValue").value = output;
+        }
+
+        function decimalToBinary(desimal) {
+            let binary = "";
+            for (let i = 7; i >= 0; i--) {
+                let bit = Math.floor(desimal / Math.pow(2, i));
+                binary += bit;
+                desimal -= bit * Math.pow(2, i);
+            }
+            return binary;
+        }
+
+        function binaryToDecimal(binary) {
+            let desimal = 0;
+            for (let i = 0; i < 8; i++) {
+                desimal += parseInt(binary[i]) * Math.pow(2, 7 - i);
+            }
+            return desimal;
+        }
+
+        function resetForm() {
+            document.getElementById("inputValue").value = "";
+            document.getElementById("outputValue").value = "";
+        }
+    </script>
+</body>
+</html>

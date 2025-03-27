@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication</title>
+    <style>
+        table {
+            width: 200px;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="table-container"></div>
+
+    <script>
+        function getValidNumber() {
+            let Num;
+            do {
+                Num = prompt("A number?");
+                if (Num === null) {
+                    alert("Fill the number!");
+                } else if (isNaN(Num) || Num.trim() === "") {
+                    alert("Harap masukkan angka yang valid!");
+                } else {
+                    return parseInt(Num);
+                }
+            } while (true);
+        }
+
+        function generateTable(Number) {
+            let tableContainer = document.getElementById("table-container");
+            let tableHTML = "<table><tr>";
+            
+            for (let i = 1; i <= Number; i++) {
+                tableHTML += `<tr><td>${i}</td><td>x</td><td>${Number}</td><td>${i * Number}</td></tr>`;
+            }
+            
+            tableHTML += "</table>";
+            tableContainer.innerHTML = tableHTML;
+        }
+
+        let Number = getValidNumber();
+        generateTable(Number);
+    </script>
+
+</body>
+</html>

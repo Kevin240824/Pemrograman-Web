@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aritmatic</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        td {
+            border: 3px solid black;
+            padding: 10px;
+            text-align: center;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <label>Angka Pertama: <input type="text" id="numSatu"></label><br>
+    <label>Angka Kedua: <input type="text" id="numDua"></label><br>
+    <button onclick="hitung()">Count</button>
+    
+    <table>
+        <tr>
+            <td id="display1"></td>
+            <td><h2><b>+</b></h2></td>
+            <td id="display2"></td>
+            <td><h2><b>=</b></h2></td>
+            <td id="hasil"></td>
+        </tr>
+        <tr>
+            <td id="display1sub"></td>
+            <td><h2><b>-</b></h2></td>
+            <td id="display2sub"></td>
+            <td><h2><b>=</b></h2></td>
+            <td id="hasil1"></td>
+        </tr>
+    </table>
+
+    <script>
+        function hitung() {
+            let numSatu = document.getElementById("numSatu").value;
+            let numDua = document.getElementById("numDua").value;
+
+            if (isNaN(numSatu) && isNaN(numDua)) {
+                alert("Angka pertama dan kedua harus angka.");
+                return;
+            } else if (isNaN(numSatu)) {
+                alert("Angka pertama bukan angka.");
+                return;
+            } else if (isNaN(numDua)) {
+                alert("Angka kedua harus angka.");
+                return;
+            }
+
+            let numberOne = parseInt(numSatu);
+            let numberTwo = parseInt(numDua);
+
+            document.getElementById("display1").innerHTML = numberOne;
+            document.getElementById("display2").innerHTML = numberTwo;
+            document.getElementById("hasil").innerHTML = numberOne + numberTwo;
+            
+            document.getElementById("display1sub").innerHTML = numberOne;
+            document.getElementById("display2sub").innerHTML = numberDua;
+            document.getElementById("hasil1").innerHTML = numberOne - numberDua;
+        }
+    </script>
+</body>
+</html>
