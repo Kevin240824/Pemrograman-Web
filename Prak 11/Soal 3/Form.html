@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Operasi Array</title>
+</head>
+<body>
+  <h3>Data</h3>
+  <input type="text" id="dataInput">
+  <button onclick="addData()">Add</button>
+  <select id="operation" onchange="processOperation()">
+    <option value="">Pilih Operasi</option>
+    <option value="display">Display</option>
+    <option value="count">Count</option>
+    <option value="sum">Sum</option>
+    <option value="average">Average</option>
+    <option value="max">Max</option>
+    <option value="min">Min</option>
+    <option value="ganjil">Ganjil</option>
+    <option value="genap">Genap</option>
+    <option value="hapus">Hapus</option>
+  </select>
+
+  <h3>Hasil</h3>
+  <input type="text" id="hasilOutput" readonly>
+
+  <script>
+    let dataArray = [];
+
+    function addData() {
+      const input = document.getElementById('dataInput');
+      const value = parseInt(input.value);
+      if (!isNaN(value)) {
+        dataArray.push(value);
+      }
+      input.value = '';
+      input.focus();
+    }
+
+    function processOperation() {
+      const operation = document.getElementById('operation').value;
+      let result = '';
+
+      if (operation === 'display') {
+        result = dataArray.join(', ');
+      } else if (operation === 'count') {
+        result = dataArray.length;
+      } else if (operation === 'sum') {
+        result = dataArray.reduce((a, b) => a + b, 0);
+      } else if (operation === 'average') {
+        if (dataArray.length > 0) {
+          result = (dataArray.reduce((a, b) => a + b, 0) / dataArray.length).toFixed(2);
+        } else {
+          result = '0';
+        }
+      } else if (operation === 'max') {
+        result = Math.max(...dataArray);
+      } else if (operation === 'min') {
+        result = Math.min(...dataArray);
+      } else if (operation === 'ganjil') {
+        result = dataArray.filter(x => x % 2 !== 0).join(', ');
+      } else if (operation === 'genap') {
+        result = dataArray.filter(x => x % 2 === 0).join(', ');
+      } else if (operation === 'hapus') {
+        dataArray = [];
+        result = '';
+      }
+
+      document.getElementById('hasilOutput').value = result;
+    }
+  </script>
+</body>
+</html>
