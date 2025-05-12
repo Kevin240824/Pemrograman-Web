@@ -1,0 +1,52 @@
+<!-- Kevin Alfa Setiawan - 2373032 -->
+<!-- Prak 12 soal 3 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Change Colors</title>
+  <style>
+    div {
+      width: 40px;
+      height: 40px;
+      margin: 5px;
+      float: left;
+      border: 2px solid blue;
+      text-align: center;
+    }
+    span {
+      color: red;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <button>Change colors</button>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+
+  <script>
+    $("button").click(function () {
+      $("div").each(function (index, domEle) {
+        if ($(domEle).attr("id") === "merah") {
+          return false;
+        } else {
+          $(domEle).css("background-color", "yellow");
+        }
+      });
+    });
+
+    $("div").click(function () {
+      $(this).css("background-color", "red");
+      $(this).attr("id", "merah");
+    });
+  </script>
+
+</body>
+</html>
