@@ -1,0 +1,89 @@
+<!-- Kevin Alfa Setiawan - 2373032 -->
+<!-- Prak 13 soal 1 -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Nilai Mahasiswa</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #000000;
+            color: white;
+        }
+        tr:nth-child(odd) {
+            background-color: #FFFFCC;
+        }
+        tr:nth-child(even) {
+            background-color: #CCFFAA;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Selamat! Berikut adalah Daftar Mahasiswa yang mendapat Nilai A Pemrograman Web SI Tahun Ajaran 2023/2024</h3>
+
+<form id="filterForm">
+    <input type="radio" name="kelas" value="all" checked> All<br>
+    <input type="radio" name="kelas" value="A"> Kelas A<br>
+    <input type="radio" name="kelas" value="B"> Kelas B<br>
+    <button type="button" id="searchBtn">Search</button>
+</form>
+
+<table id="dataTable">
+    <thead>
+        <tr>
+            <th>NRP</th>
+            <th>NAMA</th>
+            <th>KELAS</th>
+            <th>NILAI AKHIR</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script src="nilai.js"></script>
+<script>
+$(document).ready(function(){
+    $("#searchBtn").click(function(){
+        var selectedClass = $(":radio[name='kelas']:checked").val();
+        var file = "";
+
+        if (selectedClass === "A") {
+            file = "nilaiA.js";
+        } else if (selectedClass === "B") {
+            file = "nilaiB.js";
+        } else {
+            file = "nilai.js";
+        }
+
+        $.getScript(file, function(){
+            var tableContent = "";
+            $.each(data, function(index, item){
+                tableContent += "<tr>";
+                tableContent += "<td>" + item.nrp + "</td>";
+                tableContent += "<td>" + item.nama + "</td>";
+                tableContent += "<td>" + item.kelas + "</td>";
+                tableContent += "<td>" + item.nilaiakhir + "</td>";
+                tableContent += "</tr>";
+            });
+
+            $("#dataTable tbody").html(tableContent);
+        });
+    });
+});
+</script>
+
+</body>
+</html>
