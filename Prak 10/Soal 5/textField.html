@@ -1,0 +1,58 @@
+<!-- Kevin Alfa Setiawan - 2373032 -->
+<!-- Prak 12 soal 5 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Find Company</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #company-list div {
+      padding: 5px;
+    }
+    .highlight {
+      color: red;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <h3>Cari Nama Perusahaan IT:</h3>
+  <input type="text" id="search" placeholder="Ketik untuk mencari..."><br><br>
+
+  <div id="company-list">
+    <div>Sun Microsystem</div>
+    <div>Apache Software Foundation</div>
+    <div>Oracle Coorporation</div>
+    <div>International Bussiness Machines</div>
+    <div>Microsoft Coorporation</div>
+    <div>Apple Inc</div>
+    <div>Sap Ag</div>
+    <div>Accenture</div>
+    <div>Computer Sciences Coorporation</div>
+    <div>Google</div>
+    <div>Softbank</div>
+    <div>Yahoo</div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#search').on('keyup', function() {
+        let keyword = $(this).val().toLowerCase();
+
+        $('#company-list div').each(function() {
+          let text = $(this).text().toLowerCase();
+          if (text.includes(keyword) && keyword !== '') {
+            $(this).addClass('highlight');
+          } else {
+            $(this).removeClass('highlight');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
