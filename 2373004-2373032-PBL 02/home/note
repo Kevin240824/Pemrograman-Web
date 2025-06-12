@@ -1,0 +1,72 @@
+<!-- process sign up
+<?php
+
+session_start();
+require_once 'connect.php';
+
+if (isset($_POST[''])) {
+    $nama = $_POST[''];
+    $email = $_POST[''];
+    $pass = password_hash($_POST[''], PASSWORD_DEFAULT);
+
+    $checkEmail = $conn->query("SELECT email FROM sign_up WHERE email = '$email'");
+    if ($checkEmail->num_rows > 0) {
+        $_SESSION['register_error'] = 'Email is already registered!';
+        $_SESSION['active_form'] = 'register';
+
+    } else {
+        $conn->query("INSERT INTO sign_up (nama, email, pass) VALUES ('$nama', '$email', '$pass')");
+
+    }
+    header("Location: homepage.php");
+    exit();
+}
+
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $result = $conn->query("SELECT * FROM sign_up WHERE email  = '$email'");
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+
+
+            $_SESSION['login_error'] = ['Incorrect email or password'];
+            $_SESSION['active_form'] = 'login';
+            header("Location: homepage.php");
+
+            exit();
+        }
+    }
+}
+?>
+
+
+
+homepage
+<?php
+session_start();
+
+$errors = [
+  'login' => $_SESSION['login_error'] ?? '',
+  'register' => $_SESSION['register_error'] ?? ''
+];
+$activeForm = $_SESSION['active_form'] ?? 'login';
+
+session_unset();
+
+function showError($error){
+  return !empty($error) ? "<p class='error-message'>$error</p>" : '';
+}
+
+function isActiveForm($formName, $activeForm){
+  return $formName === $activeForm ? 'active' : '';
+}
+
+
+<div class="modal-body <?= isActiveForm('register', $activeForm); ?>">
+                  <form action="process_signup.php" method="post">
+                    <?= showError($errors['register']); ?> -->
