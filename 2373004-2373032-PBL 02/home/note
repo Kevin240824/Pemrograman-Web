@@ -1,4 +1,4 @@
-process sign up
+<!-- process sign up
 <?php
 
 session_start();
@@ -69,4 +69,8 @@ function isActiveForm($formName, $activeForm){
 
 <div class="modal-body <?= isActiveForm('register', $activeForm); ?>">
                   <form action="process_signup.php" method="post">
-                    <?= showError($errors['register']); ?>
+                    <?= showError($errors['register']); ?> -->
+
+
+
+                    ALTER TABLE `keranjang` DROP INDEX `keranjang_ibfk_1`;

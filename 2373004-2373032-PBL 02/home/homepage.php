@@ -1,25 +1,46 @@
 <?php
 session_start();
-require_once 'connect.php';
 
-// Tampilkan pesan error/success
-if (isset($_GET['signup'])) {
-  if ($_GET['signup'] === 'success') {
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+// Tampilkan pesan error signup
+if (isset($_SESSION['signup_error'])) {
+  echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ' . htmlspecialchars($_SESSION['signup_error']) . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+  unset($_SESSION['signup_error']); // Hapus session setelah ditampilkan
+}
+
+// Tampilkan pesan sukses signup
+if (isset($_GET['signup']) && $_GET['signup'] === 'success') {
+  echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
             Registration successful! You can now login.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
-  }
 }
 
+// Tampilkan pesan error signup -->
 if (isset($_SESSION['login_error'])) {
   echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-          ' . $_SESSION['login_error'] . '
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>';
-  unset($_SESSION['login_error']);
+            ' . htmlspecialchars($_SESSION['login_error']) . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+  unset($_SESSION['login_error']); // Hapus session setelah ditampilkan
 }
+
+// Tampilkan pesan sukses signup -->
+if (isset($_GET['login']) && $_GET['login'] === 'success') {
+  echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            Registration successful! You can now ener.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+}
+
+
 ?>
+
+
+
+<!-- Form signup Anda -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -156,6 +177,7 @@ if (isset($_SESSION['login_error'])) {
     </div>
   </div>
 
+  <!-- bagian item cart -->
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -164,37 +186,11 @@ if (isset($_SESSION['login_error'])) {
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="badge bg-primary rounded-pill" id="cartCount">0</span>
         </h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-capitalize">Product Item Name</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$12</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-capitalize">Product Item Name</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0 text-capitalize">Product Item Name</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
-          </li>
+        <ul class="list-group mb-3" id="cartItems">
         </ul>
-
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+        <button class="w-100 btn btn-primary btn-lg" type="button" id="continueToCheckout">Continue to checkout</button>
       </div>
     </div>
   </div>
@@ -219,8 +215,8 @@ if (isset($_SESSION['login_error'])) {
             <div class="col-md-4 d-none d-md-block">
               <select class="form-select border-0 bg-transparent" onchange="location = this.value;">
                 <option value="#">All Categories</option>
-                <option value="men.html">Men</option>
-                <option value="women.html">Women</option>
+                <option value="men.php">Men</option>
+                <option value="women.php">Women</option>
               </select>
             </div>
 
@@ -248,7 +244,7 @@ if (isset($_SESSION['login_error'])) {
               <a href="../home/homepage.php" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-              <a href="onSale.html" class="nav-link">Sale</a>
+              <a href="onSale.php" class="nav-link">Sale</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle pe-3" role="button" id="pages" data-bs-toggle="dropdown"
@@ -273,44 +269,47 @@ if (isset($_SESSION['login_error'])) {
           </div>
 
 
-         <!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <?php if (isset($_SESSION['login_error'])): ?>
-          <div class="alert alert-danger">
-            <?php echo $_SESSION['login_error']; unset($_SESSION['login_error']); ?>
-          </div>
-        <?php endif; ?>
+          <!-- Login Modal -->
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <?php if (isset($_SESSION['login_error'])): ?>
+                    <div class="alert alert-danger">
+                      <?php echo $_SESSION['login_error'];
+                      unset($_SESSION['login_error']); ?>
+                    </div>
+                  <?php endif; ?>
 
-        <form action="process_login.php" method="post">
-          <div class="mb-3">
-            <label for="loginEmail" class="form-label">Email address</label>
-            <input type="email" class="form-control" name="email" id="loginEmail" required>
+                  <form action="process_login.php" method="post">
+                    <div class="mb-3">
+                      <label for="loginEmail" class="form-label">Email address</label>
+                      <input type="email" class="form-control" name="email" id="loginEmail" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="loginPassword" class="form-label">Password</label>
+                      <input type="password" class="form-control" name="password" id="loginPassword" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                      <input type="checkbox" class="form-check-input" id="rememberMe">
+                      <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                  </form>
+                  <div class="text-center mt-3">
+                    <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal"
+                        data-bs-dismiss="modal">Sign up</a></p>
+                    <p><a href="#" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal">Forgot
+                        Password?</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="loginPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" name="password" id="loginPassword" required>
-          </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="rememberMe">
-            <label class="form-check-label" for="rememberMe">Remember me</label>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-        <div class="text-center mt-3">
-          <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign up</a></p>
-          <p><a href="#">Forgot password?</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
           <!-- Signup Modal -->
           <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
@@ -347,6 +346,51 @@ if (isset($_SESSION['login_error'])) {
                   <div class="text-center mt-3">
                     <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
                         data-bs-dismiss="modal">Login</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Forgot Modal -->
+          <div class="modal fade" id="forgotModal" tabindex="-1" aria-labelledby="forgotModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="forgotModalLabel"> Reset Your Account</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <?php if (isset($_SESSION['forgot_error'])): ?>
+                    <div class="alert alert-danger">
+                      <?php echo $_SESSION['forgot_error'];
+                      unset($_SESSION['forgot_error']); ?>
+                    </div>
+                  <?php endif; ?>
+
+                  <form action="process_forgot.php" method="post">
+                    <div class="mb-3">
+                      <label for="nama" class="form-label">Username</label>
+                      <input type="text" class="form-control" name="nama" id="nama" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="con_password" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control" name="con_password" id="con_password" required>
+                    </div>
+                    <input type="submit" class="btn btn-primary w-100" name="user" value="Reset">
+                  </form>
+                  <div class="text-center mt-3">
+                    <p>Don't have an account? <a href="homepage.php" data-bs-toggle="modal"
+                        data-bs-target="#forogtModal" data-bs-dismiss="modal">Sign Up</a></p>
+
                   </div>
                 </div>
               </div>
@@ -395,7 +439,7 @@ if (isset($_SESSION['login_error'])) {
           <p class="fs-5 text-white">Whether you're looking for casual wear, formal attire, or seasonal outfits, we have
             something for everyone.</p>
           <div class="d-flex gap-3">
-            <a href="viewallProducts.html" class="btn btn-dark text-uppercase fs-6 rounded-pill px-5 py-4 mt-3">Start
+            <a href="viewallProducts.php" class="btn btn-dark text-uppercase fs-6 rounded-pill px-5 py-4 mt-3">Start
               Shopping</a>
           </div>
         </div>
@@ -412,7 +456,7 @@ if (isset($_SESSION['login_error'])) {
             <h2 class="section-title text-capitalize">Category</h2>
 
             <div class="d-flex align-items-center">
-              <a href="viewallCategory.html" class="btn btn-primary me-2">View All</a>
+              <a href="viewallCategory.php" class="btn btn-primary me-2">View All</a>
               <div class="swiper-buttons">
                 <button class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
                 <button class="swiper-next category-carousel-next btn btn-yellow">❯</button>
@@ -427,63 +471,63 @@ if (isset($_SESSION['login_error'])) {
 
           <div class="category-carousel swiper">
             <div class="swiper-wrapper">
-              <a href="../sub_products/sub_baselayer.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_baselayer.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/blayercategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Base Layer</h3>
               </a>
-              <a href="../sub_products/sub_daypack.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_daypack.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/daypackcategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Day Pack</h3>
               </a>
-              <a href="../sub_products/sub_gloves.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_gloves.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/glovescategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Gloves</h3>
               </a>
-              <a href="../sub_products/sub_longs.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_longs.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/pantscategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Long Pants</h3>
               </a>
-              <a href="../sub_products/sub_wbreaker.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_wbreaker.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/wbreakercategory2.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Windbreaker Jacket</h3>
               </a>
-              <a href="../sub_products/sub_puff.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_puff.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/puffcategory2.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Puff Jacket</h3>
               </a>
-              <a href="../sub_products/sub_wjacket.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_wjacket.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/wjacketcategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Waterproof Jacket</h4>
               </a>
-              <a href="../sub_products/sub_shoes.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_shoes.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/shoescategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Shoes</h3>
               </a>
-              <a href="../sub_products/sub_carrier.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_carrier.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/carriercategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Carrier</h3>
               </a>
-              <a href="../sub_products/sub_socks.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_socks.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/sockscategory.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Socks</h3>
               </a>
-              <a href="../sub_products/sub_shorts.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_shorts.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/short_category.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Short Pants</h3>
               </a>
-              <a href="../sub_products/sub_tents.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_tents.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/tents_category.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Tents</h3>
               </a>
-              <a href="../sub_products/sub_hydropack.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_hydropack.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/hydro_category.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Hydro Pack</h3>
               </a>
-              <a href="../sub_products/sub_hat.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_hat.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/hat_category.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Hats</h3>
               </a>
-              <a href="../sub_products/sub_others.html" class="nav-link swiper-slide text-center">
+              <a href="../sub_products/sub_others.php" class="nav-link swiper-slide text-center">
                 <img src="../imagecumbre/category/others_category.png" class="img-category" alt="Category Thumbnail">
                 <h3 class="fs-6 mt-3 fw-normal category-title">Others</h3>
               </a>
@@ -506,7 +550,7 @@ if (isset($_SESSION['login_error'])) {
             <h2 class="section-title text-capitalize">Best selling products</h2>
 
             <div class="d-flex align-items-center">
-              <a href="#" class="btn btn-primary rounded-1">View All</a>
+              <a href="viewallProducts.php" class="btn btn-primary rounded-1">View All</a>
             </div>
           </div>
 
@@ -521,7 +565,7 @@ if (isset($_SESSION['login_error'])) {
             <div class="col">
               <div class="product-item mb-4">
                 <figure>
-                  <a href="../detail_products/detail_baselayer1.html" title="Product Title">
+                  <a href="../detail_products/detail_baselayer1.php" title="Product Title">
                     <img src="../imagecumbre/blayer/blayer1.jpg" alt="Product Thumbnail" class="img-fluid">
                   </a>
                 </figure>
@@ -807,7 +851,7 @@ if (isset($_SESSION['login_error'])) {
                 <div class="content-wrapper text-light">
                   <h3 class="banner-title text-light">Items on SALE</h3>
                   <p>Discounts up to 30%</p>
-                  <a href="onSale.html" class="btn-link text-white">Shop Now</a>
+                  <a href="onSale.php" class="btn-link text-white">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -818,7 +862,7 @@ if (isset($_SESSION['login_error'])) {
                 <div class="content-wrapper text-light">
                   <h3 class="banner-title text-light">Combo offers</h3>
                   <p>Discounts up to 50%</p>
-                  <a href="comboOffers.html" class="btn-link text-white">Shop Now</a>
+                  <a href="comboOffers.php" class="btn-link text-white">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -829,7 +873,7 @@ if (isset($_SESSION['login_error'])) {
                 <div class="content-wrapper text-light">
                   <h3 class="banner-title text-light">Discount Coupons</h3>
                   <p>Discounts up to 40%</p>
-                  <a href="discountCoupons.html" class="btn-link text-white">Shop Now</a>
+                  <a href="discountCoupons.php" class="btn-link text-white">Shop Now</a>
                 </div>
               </div>
             </div>
@@ -852,7 +896,7 @@ if (isset($_SESSION['login_error'])) {
             <h2 class="section-title text-capitalize">Featured products</h2>
 
             <div class="d-flex align-items-center">
-              <a href="viewallFeatured.html" class="btn btn-primary me-2">View All</a>
+              <a href="viewallFeatured.php" class="btn btn-primary me-2">View All</a>
               <div class="swiper-buttons">
                 <button class="swiper-prev products-carousel-prev btn btn-primary">❮</button>
                 <button class="swiper-next products-carousel-next btn btn-primary">❯</button>
@@ -1353,6 +1397,174 @@ if (isset($_SESSION['login_error'])) {
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
 
+  <!-- script untuk cart -->
+  <script>
+    function changeQuantity(amount) {
+      const quantityInput = document.getElementById('quantity');
+      let currentValue = parseInt(quantityInput.value);
+      currentValue += amount;
+      if (currentValue < 1) currentValue = 1;
+      quantityInput.value = currentValue;
+    }
+
+    function addToCart() {
+      const productName = document.querySelector('.detail-product-title').textContent;
+      const productPrice = document.querySelector('.price').textContent;
+      const productImage = document.querySelector('.img-product-detail').src;
+
+      const selectedColor = document.querySelector('.color-swatches .swatch.active').style.backgroundColor || 'Black';
+
+      const selectedSize = document.querySelector('.size-selector .size.active').textContent;
+
+      const quantity = document.getElementById('quantity').value;
+
+      const priceValue = parseFloat(productPrice.replace('$', ''));
+      const totalPrice = (priceValue * quantity).toFixed(2);
+
+      const cartItem = {
+        name: productName,
+        price: productPrice,
+        total: `$${totalPrice}`,
+        image: productImage,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: quantity
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      cart.push(cartItem);
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      updateCartDisplay();
+
+      alert(`${productName} (Size: ${selectedSize}, Color: ${selectedColor}) telah ditambahkan ke keranjang!`);
+    }
+
+    function updateCartWithDeleteButtons() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartList = document.getElementById('cartItems');
+
+      cartList.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartList.innerHTML = '<li class="list-group-item text-center py-4">Keranjang kosong</li>';
+        document.getElementById('cartCount').textContent = '0';
+        return;
+      }
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += parseFloat(item.price.replace('$', '')) * parseInt(item.quantity);
+
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+        listItem.innerHTML = `
+      <div class="d-flex align-items-center flex-grow-1">
+        <img src="${item.image}" alt="${item.name}" width="60" height="60" class="rounded me-3">
+        <div class="flex-grow-1">
+          <h6 class="my-0">${item.name}</h6>
+          <small class="text-muted d-block">Size: ${item.size}</small>
+          <small class="text-muted">Color: ${item.color}</small>
+        </div>
+      </div>
+      <div class="text-end">
+        <div class="d-flex align-items-center justify-content-end">
+          <span class="text-primary fw-bold me-3">${item.price} × ${item.quantity}</span>
+          <button class="btn btn-sm btn-outline-danger delete-btn" data-index="${index}">
+            <svg width="16" height="16"><use xlink:href="#trash"></use></svg>
+          </button>
+        </div>
+        <small class="text-muted">Subtotal: $${(parseFloat(item.price.replace('$', '')) * parseInt(item.quantity)).toFixed(2)}</small>
+      </div>
+    `;
+
+        cartList.appendChild(listItem);
+      });
+
+      const totalItem = document.createElement('li');
+      totalItem.className = 'list-group-item d-flex justify-content-between fw-bold bg-light';
+      totalItem.innerHTML = `
+    <span>Total (USD)</span>
+    <strong>$${total.toFixed(2)}</strong>
+  `;
+      cartList.appendChild(totalItem);
+
+      document.getElementById('cartCount').textContent = cart.length;
+
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const index = parseInt(this.getAttribute('data-index'));
+          removeItemFromCart(index);
+        });
+      });
+    }
+
+    function removeItemFromCart(index) {
+      if (confirm('Apakah Anda yakin ingin menghapus item ini?')) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        cart.splice(index, 1);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        updateCartWithDeleteButtons();
+
+        showAlert('Item berhasil dihapus dari keranjang', 'success');
+      }
+    }
+
+    function showAlert(message, type = 'success') {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+      alertDiv.setAttribute('role', 'alert');
+      alertDiv.textContent = message;
+
+      document.body.appendChild(alertDiv);
+
+      setTimeout(() => {
+        alertDiv.remove();
+      }, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      updateCartWithDeleteButtons();
+
+      const offcanvasCart = document.getElementById('offcanvasCart');
+      if (offcanvasCart) {
+        offcanvasCart.addEventListener('shown.bs.offcanvas', function () {
+          updateCartWithDeleteButtons();
+        });
+      }
+    });
+
+    function buyNow() {
+      const product = {
+        name: document.querySelector('.detail-product-title').textContent.trim(),
+        price: document.querySelector('.price').textContent.trim(),
+        image: document.querySelector('.img-product-detail').src,
+        color: document.querySelector('.color-swatches .swatch.active')?.style.backgroundColor || 'Black',
+        size: document.querySelector('.size-selector .size.active').textContent.trim(),
+        quantity: parseInt(document.getElementById('quantity').value) || 1
+      };
+
+      const priceValue = parseFloat(product.price.replace('$', ''));
+      product.total = `$${(priceValue * product.quantity).toFixed(2)}`;
+
+      localStorage.setItem('cart', JSON.stringify([product]));
+
+      window.location.href = 'order.html';
+    }
+
+    document.getElementById('continueToCheckout').addEventListener('click', function () {
+      window.location.href = 'order.html';
+    });
+    
+    
+  </script>
+
 
   <!-- <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1605,15 +1817,13 @@ document.querySelector('form').addEventListener('submit', function(e) {
 });
 </script> -->
 
-  <!-- <script>
+<!-- script untuk memunculkan header -->
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Check if user is logged in
       <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']): ?>
-        // Hide auth buttons and show user icons
         document.querySelector('.auth-section').classList.add('d-none');
         document.querySelector('.user-section').classList.remove('d-none');
 
-        // Update user icon with name
         const userIcon = document.querySelector('.user-section a[title="My Account"]');
         if (userIcon) {
           userIcon.innerHTML = `<svg width="24" height="24"><use xlink:href="#user"></use></svg>`;
@@ -1621,11 +1831,9 @@ document.querySelector('form').addEventListener('submit', function(e) {
         }
       <?php endif; ?>
 
-      // Add logout functionality
       document.querySelector('.user-section').addEventListener('click', function (e) {
         if (e.target.closest('a[title="My Account"]')) {
           e.preventDefault();
-          // Create logout dropdown
           const dropdown = document.createElement('div');
           dropdown.className = 'dropdown-menu show';
           dropdown.style.position = 'absolute';
@@ -1634,18 +1842,10 @@ document.querySelector('form').addEventListener('submit', function(e) {
         <a class="dropdown-item" href="logout.php">Logout</a>
       `;
           this.appendChild(dropdown);
-
-          // Close dropdown when clicking outside
-          document.addEventListener('click', function closeDropdown(evt) {
-            if (!dropdown.contains(evt.target)) {
-              dropdown.remove();
-              document.removeEventListener('click', closeDropdown);
-            }
-          });
         }
       });
     });
-  </script> -->
+  </script>
 
 </body>
 
