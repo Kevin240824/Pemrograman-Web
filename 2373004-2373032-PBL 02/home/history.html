@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Order History - CUMBREPACK Outdoor Gear</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/vendor.css">
+    <link rel="stylesheet" type="text/css" href="home.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <!-- Include the same SVG icons from your original file -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <!-- Paste all your SVG symbols here -->
+    </svg>
+
+    <div class="preloader-wrapper">
+      <div class="preloader">
+      </div>
+    </div>
+
+    <!-- Header (same as your original) -->
+    <header>
+      <div class="container-fluid">
+        <div class="row py-4">
+          
+          <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
+            <div class="d-flex align-items-center my-3 my-sm-0">
+              <a href="homepage.html" class="nav-link"><h3>CUMBREPACK</h3></a>
+            </div>
+          </div>
+          
+          <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-4">
+            <div class="search-bar row border border-light-subtle bg-light p-2 py-1 rounded-1">
+              <div class="col-md-4 d-none d-md-block">
+                <select class="form-select border-0 bg-transparent" onchange="location = this.value;">
+                  <option value="#">All Categories</option>
+                  <option value="men.html">Men</option>
+                  <option value="women.html">Women</option>
+                </select>
+              </div>
+
+              <div class="col-11 col-md-7">
+                <form id="search-form" class="text-center" action="index.html" method="post">
+                  <input type="text" class="form-control border-0 bg-transparent" placeholder="Find your choice of clothing">
+                </form>
+              </div>              
+              <div class="col-1">
+                <a href="#">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <ul class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
+              <li class="nav-item">
+                <a href="../home/homepage.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="onSale.html" class="nav-link">Sale</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle pe-3" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                <ul class="dropdown-menu border-0 rounded-0 shadow" aria-labelledby="pages">
+                  <li><a href="../footer/Aboutus_footer.html" class="dropdown-item">About Us </a></li>
+                  <li><a href="../footer/Newspage_footer.html" class="dropdown-item">Our Blog </a></li>
+                  <li><a href="../footer/Sustainbility_footer.html.html" class="dropdown-item">Sustainibility </a></li>
+                  <li><a href="../footer/FAQ_footer.html" class="dropdown-item">FAQ </a></li>
+                  <li><a href="../footer/Contact_footer.html" class="dropdown-item">Contact </a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-sm-8 col-lg-2 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
+            <div class="user-section">
+              <ul class="d-flex list-unstyled m-0 gap-3">
+                <li>
+                  <a href="history.html" class="p-2" title="Order History">
+                    <svg width="24" height="24"><use xlink:href="#user"></use></svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="p-2" title="Wishlist">
+                    <svg width="24" height="24"><use xlink:href="#wishlist"></use></svg>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="p-2" title="Cart" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+                    <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="section-padding">
+      <div class="container-lg">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="display-5 mb-4">Order History</h1>
+            
+            <!-- Order Filter -->
+            <div class="card mb-4 border-0 shadow">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="mb-0">Filter Orders</h5>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="d-flex flex-wrap gap-2">
+                      <select class="form-select w-auto">
+                        <option>All Orders</option>
+                        <option>Last 30 Days</option>
+                        <option>Past 6 Months</option>
+                        <option>2025</option>
+                        <option>2024</option>
+                      </select>
+                      <select class="form-select w-auto">
+                        <option>All Status</option>
+                        <option>Processing</option>
+                        <option>Shipped</option>
+                        <option>Delivered</option>
+                        <option>Cancelled</option>
+                      </select>
+                      <button class="btn btn-primary">Apply</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Order List -->
+            <div class="card border-0 shadow">
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                      <tr>
+                        <th class="border-0">Order #</th>
+                        <th class="border-0">Date</th>
+                        <th class="border-0">Items</th>
+                        <th class="border-0">Total</th>
+                        <th class="border-0">Status</th>
+                        <th class="border-0 text-end">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Order 1 -->
+                      <tr>
+                        <td class="align-middle">#CP-2025-0456</td>
+                        <td class="align-middle">June 15, 2025</td>
+                        <td class="align-middle">
+                          <div class="d-flex align-items-center">
+                            <img src="../imagecumbre/wbreaker/wbreaker1.jpg" alt="Product" class="img-thumbnail me-2" width="60">
+                            <div>
+                              <h6 class="mb-0">StormGuard Waterproof Jacket</h6>
+                              <small class="text-muted">Qty: 1</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">$110.00</td>
+                        <td class="align-middle">
+                          <span class="badge bg-success">Delivered</span>
+                        </td>
+                        <td class="align-middle text-end">
+                          <a href="order-details.html" class="btn btn-sm btn-outline-dark">View</a>
+                          <a href="#" class="btn btn-sm btn-outline-primary">Reorder</a>
+                        </td>
+                      </tr>
+                      
+                      <!-- Order 2 -->
+                      <tr>
+                        <td class="align-middle">#CP-2025-0389</td>
+                        <td class="align-middle">May 28, 2025</td>
+                        <td class="align-middle">
+                          <div class="d-flex align-items-center">
+                            <img src="../imagecumbre/carrier/carrier1.jpg" alt="Product" class="img-thumbnail me-2" width="60">
+                            <div>
+                              <h6 class="mb-0">Wolftrail Carrier 55+5L</h6>
+                              <small class="text-muted">Qty: 1</small>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center mt-2">
+                            <img src="../imagecumbre/gloves/gloves1.jpeg" alt="Product" class="img-thumbnail me-2" width="60">
+                            <div>
+                              <h6 class="mb-0">Rovos GripClimb V.1</h6>
+                              <small class="text-muted">Qty: 2</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">$560.00</td>
+                        <td class="align-middle">
+                          <span class="badge bg-success">Delivered</span>
+                        </td>
+                        <td class="align-middle text-end">
+                          <a href="order-details.html" class="btn btn-sm btn-outline-dark">View</a>
+                          <a href="#" class="btn btn-sm btn-outline-primary">Reorder</a>
+                        </td>
+                      </tr>
+                      
+                      <!-- Order 3 -->
+                      <tr>
+                        <td class="align-middle">#CP-2025-0217</td>
+                        <td class="align-middle">April 12, 2025</td>
+                        <td class="align-middle">
+                          <div class="d-flex align-items-center">
+                            <img src="../imagecumbre/blayer/blayer1.jpg" alt="Product" class="img-thumbnail me-2" width="60">
+                            <div>
+                              <h6 class="mb-0">Wolfy Layer Women's</h6>
+                              <small class="text-muted">Qty: 1</small>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center mt-2">
+                            <img src="../imagecumbre/kaoskaki/kaoskaki1.jpeg" alt="Product" class="img-thumbnail me-2" width="60">
+                            <div>
+                              <h6 class="mb-0">ArkaTrail Socks</h6>
+                              <small class="text-muted">Qty: 3</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">$426.00</td>
+                        <td class="align-middle">
+                          <span class="badge bg-success">Delivered</span>
+                        </td>
+                        <td class="align-middle text-end">
+                          <a href="order-details.html" class="btn btn-sm btn-outline-dark">View</a>
+                          <a href="#" class="btn btn-sm btn-outline-primary">Reorder</a>
+                        </td>
+                      </tr>
+                      
+                      <!-- Order 4 -->
+                      <tr>
+                        <td class="align-middle">#CP-2025-0093</td>
+                        <td class="align-middle">March 5, 2025</td>
+                        <td class="align-middle">
+                          <div class="d-flex align-items-center">
+                            <img src="../imagecumbre/daypack/daypack1.jpg" alt="Product" class="img-thumbnail me-2" width="60">
+                            <div>
+                              <h6 class="mb-0">Teqari 40 Daypack</h6>
+                              <small class="text-muted">Qty: 1</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">$170.00</td>
+                        <td class="align-middle">
+                          <span class="badge bg-warning text-dark">Processing</span>
+                        </td>
+                        <td class="align-middle text-end">
+                          <a href="order-details.html" class="btn btn-sm btn-outline-dark">View</a>
+                          <a href="#" class="btn btn-sm btn-outline-danger">Cancel</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Pagination -->
+            <nav class="mt-4">
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer (same as your original) -->
+    <footer class="bg-dark text-light section-padding pb-5">
+      <div class="container-lg">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="footer-menu">
+              <img src="../imagecumbre/logo.jpg" width="240" height="100" alt="logo">
+              <div class="social-links mt-3">
+                <ul class="d-flex list-unstyled gap-2">
+                  <li>
+                    <a href="#" class="btn btn-outline-light">
+                      <svg width="16" height="16"><use xlink:href="#facebook"></use></svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="btn btn-outline-light">
+                      <svg width="16" height="16"><use xlink:href="#twitter"></use></svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="btn btn-outline-light">
+                      <svg width="16" height="16"><use xlink:href="#youtube"></use></svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="btn btn-outline-light">
+                      <svg width="16" height="16"><use xlink:href="#instagram"></use></svg>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="btn btn-outline-light">
+                      <svg width="16" height="16"><use xlink:href="#amazon"></use></svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-sm-6">
+            <div class="footer-menu">
+              <h5 class="widget-title text-light">CUMBREPACK</h5>
+              <ul class="menu-list list-unstyled">
+                <li class="menu-item">
+                  <a href="../footer/Aboutus_footer.html" class="nav-link">About us</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Conditions</a>
+                </li>
+                <li class="menu-item">
+                  <a href="../footer/Newspage_footer.html" class="nav-link">Our Blog</a>
+                </li>
+                <li class="menu-item">
+                  <a href="../footer/Career_footer.html" class="nav-link">Careers</a>
+                </li>
+                <li class="menu-item">
+                  <a href="../footer/Sustainbility_footer.html" class="nav-link">Sustainibility</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6">
+            <div class="footer-menu">
+              <h5 class="widget-title text-light">Quick Links</h5>
+              <ul class="menu-list list-unstyled">
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Offers</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Stores</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Shop</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6">
+            <div class="footer-menu">
+              <h5 class="widget-title text-light">Customer Service</h5>
+              <ul class="menu-list list-unstyled">
+                <li class="menu-item">
+                  <a href="../footer/FAQ_footer.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="menu-item">
+                  <a href="../footer/Contact_footer.html" class="nav-link">Contact</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Privacy Policy</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Returns & Refunds</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">Delivery Information</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="footer-menu">
+              <h5 class="widget-title text-light">Subscribe Us</h5>
+              <p>Subscribe to our newsletter to get updates about our grand offers.</p>
+              <form class="d-flex mt-3 gap-0" action="index.html">
+                <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="Email Address" aria-label="Email Address">
+                <button class="btn btn-primary rounded-end rounded-0" type="submit">Subscribe</button>
+              </form>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+    <div id="footer-bottom" class="bg-dark text-light py-5">
+      <div class="container-lg">
+        <div class="row">
+          <div class="col-md-6 copyright">
+            <p>© 2025 CUMBREPACK. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 credit-link text-start text-md-end">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
